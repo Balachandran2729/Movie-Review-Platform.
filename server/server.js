@@ -1,6 +1,7 @@
 const express = require('express');
 // const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const connectDB = require('./config/db');
@@ -26,6 +27,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/movies/:id/reviews', reviewRoutes);
 app.use('/api/users', userRoutes);
+// Add this line after other middleware
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Health check route
 app.get('/', (req, res) => {
